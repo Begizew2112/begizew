@@ -1,10 +1,9 @@
-from typing import List
-
 class Solution:
     def moveZeroes(self, nums: List[int]) -> None:
-        write_ptr = 0
-        
-        for read_ptr in range(len(nums)):
-            if nums[read_ptr] != 0:
-                nums[write_ptr], nums[read_ptr] = nums[read_ptr], nums[write_ptr]
-                write_ptr += 1
+        left = 0
+        for r in range(len(nums)):
+            if nums[r] != 0:
+                nums[left], nums[r] = nums[r], nums[left]
+                left +=1
+
+        return nums
