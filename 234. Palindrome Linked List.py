@@ -10,22 +10,63 @@ class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
-
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         if not head or not head.next:
             return True
-        nums =[]
-        while head:
-            nums.append (head.val)
-            head = head.next
-        l,r, = 0 , len(nums)-1
-        while l<=r :
-            if nums[l] != nums[r]:
+        # Find the middle of the linked list
+        slow , fast = head , head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        pre = None
+        curr = slow
+        while curr:
+            temp = curr.next
+            curr.next = pre
+            pre = curr
+            curr= temp
+        left , right = head , pre 
+        while right :
+            if left.val != right.val :
                 return False
-            l +=1
-            r -=1
-        return True
+            left , right = left.next , right.next
+
+        return True 
+        # nums =[]
+        # while head:
+        #     nums.append (head.val)
+        #     head = head.next
+        # l,r, = 0 , len(nums)-1
+        # while l<=r :
+        #     if nums[l] != nums[r]:
+        #         return False
+        #     l +=1
+        #     r -=1
+        # return True
+
+
+
+# class Solution:
+#     def isPalindrome(self, head: Optional[ListNode]) -> bool:
+#         if not head or not head.next:
+#             return True
+#         nums =[]
+#         while head:
+#             nums.append (head.val)
+#             head = head.next
+#         l,r, = 0 , len(nums)-1
+#         while l<=r :
+#             if nums[l] != nums[r]:
+#                 return False
+#             l +=1
+#             r -=1
+#         return True
 
         
         # # Find the middle of the linked list
